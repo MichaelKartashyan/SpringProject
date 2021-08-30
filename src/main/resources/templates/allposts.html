@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org" layout:decorator="'layout/main.html'">
+
+<div layout:fragment="content">
+
+
+  <div class="container bootstrap snippets bootdey d-flex flex-wrap" >
+
+    <div class="col-md-5 mx-2" th:each="post:${posts}">
+      <div class="widget widget-blog">
+        <div th:text="${post.getPostDate()}"></div>
+        <div class="widget-blog-cover">
+          <img th:src="${post.getPictureURL()}"  alt="">
+        </div>
+
+        <div class="widget-blog-content">
+          <h5 th:text="${post.getTitle()}"></h5>
+          <p th:text="${post.getContent()}"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</html>

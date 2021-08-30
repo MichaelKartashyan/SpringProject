@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Task</title>
+    <link rel="stylesheet" type="text/css" th:href="@{'/css/bootstrap.min.css'}">
+    <link rel="stylesheet" type="text/css" th:href="@{'/css/css.css'}">
+
+</head>
+<body>
+
+<div th:insert="${'/layout/navbar.html'}"></div>
+
+
+<div layout:fragment="content">
+
+</div>
+<script type="text/javascript" th:src="@{'/js/bootstrap.min.js'}"></script>
+<script>
+    function show(){
+        document.getElementById("popUp").style.display = "block";
+    }
+    function hide(){
+        document.getElementById("popUp").style.display = "none";
+    }
+</script>
+</body>
+</html>

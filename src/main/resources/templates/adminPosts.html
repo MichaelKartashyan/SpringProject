@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org" layout:decorator="'layout/main.html'">
+
+<div layout:fragment="content">
+
+
+    <div class="container">
+        <div class="alert alert-success alert-dismissible fade show" role="alert" th:if = "${param.success!=null}">
+            Операция успешно совершена!
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        <a class="btn btn-primary my-3 " onclick="show();" style="background-color:#1E1A5E; " href="#" th:text = "#{admin.addpost}">+ Добавить Пост</a>
+        <div class="b-popup" id="popUp">
+            <div class="b-popup-content">
+                <form method="post" th:action="${'/addPost'}">
+                    <div class="mb-3">
+                        <label class="form-label" th:text = "#{admin.title}">Заголовок</label>
+                        <input type="text" class="form-control" id="title" name="title">
+                    </div>
+                    <div class="mb-3">
+                        <label  class="form-label" th:text = "#{admin.shortDescription}">Краткое содержание</label>
+                        <textarea class="form-control" id="shortContent" name="shortContent"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label  class="form-label" th:text = "#{admin.content}">Содержание</label>
+                        <textarea class="form-control" id="content" name="content"></textarea>
+                    </div>
+
+                    <div class="mb-3">
+                        <label  class="form-label" th:text = "#{admin.image}">Ссылка на картинку</label>
+                        <input type="text" class="form-control" id="pictureUrl" name="pictureUrl">
+                    </div>
+
+                    <a href="#"  onclick="hide()" class="btn bg-secondary" th:text = "#{admin.close}">Закрыть</a>
+                    <button type="submit" class="btn btn-primary" th:text = "#{admin.add}">Добавить</button>
+                </form>
+            </div>
+        </div>
+
+
+
+
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col" class="col-6" th:text = "#{admin.title}">Заголовок</th>
+                <th scope="col" th:text = "#{admin.shortDescription}">Краткое содержание</th>
+                <th scope="col" th:text = "#{admin.date}">Время</th>
+                <th scope="col" th:text = "#{admin.details}">Подробнее</th>
+            </tr>
+            </thead>
+            <tbody>
+
+
+
+
+            <tr th:each="post:${posts}">
+                <td scope="row" th:text="${post.getId()}"></td>
+                <td th:text="${post.getTitle()}"></td>
+                <td th:text="${post.getShortContent()}"></td>
+                <td th:text="${post.getContent()}"></td>
+                <td th:text="${post.getPostDate()}"></td>
+                <td><a class="btn btn-primary" style="background-color:#1E1A5E" th:href="@{'/detailPost/' + ${post.getId()}}" th:text = "#{admin.details}">Детали</a> </td>
+            </tr>
+
+
+
+            </tbody>
+        </table>
+    </div>
+</div>
+
+</html>

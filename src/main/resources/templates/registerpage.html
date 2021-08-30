@@ -1,0 +1,60 @@
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout/main.html">
+
+<div layout:fragment="content">
+    <div class="row">
+        <div class="col-12">
+            <h1 class="text-center">
+               <span th:text="#{menu.register}"></span>
+            </h1>
+            <div class="alert alert-success alert-dismissible fade show" role="alert" th:if = "${(param.success!=null)}">
+                User are create!
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            <div class="alert alert-danger alert-dismissible fade show" role="alert" th:if = "${(param.error!=null)}">
+                email or password unsuitable!
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            <div class="row">
+                <div class="col-6 mx-auto">
+                    <form th:action="@{'/register'}" method="post">
+                        <div class="mt-2">
+                            <label>
+                                FULL NAME
+                            </label>
+                            <input type="text" class="form-control mt-2"  name="full_name">
+                        </div>
+
+                        <div class="mt-2">
+                            <label>
+                                Email
+                            </label>
+                            <input type="email" class="form-control mt-2"  name="email">
+                        </div>
+
+                        <div class="mt-2">
+                            <label>
+                                NEW PASSWORD
+                            </label>
+                            <input type="password" class="form-control mt-2" name="new_password">
+                        </div>
+                        <div class="mt-2">
+                            <label>
+                                CONFIRM NEW PASSWORD
+                            </label>
+                            <input type="password" class="form-control mt-2" name="confirm_new_password">
+                        </div>
+
+                        <div class="mt-3">
+                            <button class="btn btn-success" th:text="#{menu.register}"></button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</html>

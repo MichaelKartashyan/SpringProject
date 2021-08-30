@@ -1,0 +1,53 @@
+<nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Shop</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        <a class="nav-link " aria-current="page" href="/shop" th:text = "#{menu.shop}"></a>
+        <a class="nav-link " aria-current="page" href="/task" th:text = "#{menu.task}"></a>
+        <a class="nav-link " aria-current="page" href="/allposts" th:text = "#{menu.posts}"></a>
+
+        <a class="nav-link " aria-current="page" href="/loginpage" th:text = "#{menu.login}" sec:authorize="isAnonymous()"></a>
+        <a class="nav-link " aria-current="page" href="/registerpage" th:text = "#{menu.register}" sec:authorize="isAnonymous()"></a>
+
+
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0" sec:authorize="isAuthenticated()">
+          <li class="nav-item">
+            <a class="nav-link" th:href="@{'/profile'}" th:text = "${CURRENT_USER.fullName}"></a>
+          </li>
+          <li class="nav-item" sec:authorize="hasAnyRole('ROLE_ADMIN')">
+            <a class="nav-link" th:href="@{'/adminPosts'}" th:text="#{menu.admin}">Admin Posts</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="JavaScript:void(0)" onclick="logout()">Logout</a>
+          </li>
+          <script type="text/javascript">
+            function logout(){
+              document.getElementById("logoutFormId").submit();
+            }
+          </script>
+          <form th:action="@{'/tologout'}" method="post" id = "logoutFormId"></form>
+        </ul>
+
+
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" th:text="#{menu.language}">
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" th:href="@{'?lng=en'}">ENG</a></li>
+              <li><a class="dropdown-item" th:href="@{'?lng=ru'}">РУС</a></li>
+            </ul>
+          </li>
+        </ul>
+
+      </div>
+    </div>
+<!--    </div>-->
+<!--    <a href="/register.jsp" class="nav-link float-end ">Register</a>-->
+<!--    <a href="/auth.jsp" class="nav-link float-end ">Log In</a>-->
+<!--  </div>-->
+</nav>

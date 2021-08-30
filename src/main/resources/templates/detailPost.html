@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org" layout:decorator="'layout/main.html'">
+
+<div layout:fragment="content">
+
+
+
+
+  <div class="container">
+
+    <div class="row">
+      <div class="col-12">
+        <table class="table table-striped">
+          <tr th:each="cat:${post.categoriesPost}">
+            <td th:text="${cat.categoryName}"></td>
+            <td style="width: 10%;">
+              <form th:action="${'/removecategory'}" method="post">
+                <input type="hidden" name="postId" th:value="${post.id}">
+                <input type="hidden" name="categoryId" th:value="${cat.id}">
+                <button class="btn btn-danger btn-sm">-</button>
+              </form>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+
+
+
+    <div class="row">
+      <div class="col-12">
+        <table class="table table-striped">
+          <tr th:each="cat:${categoriesPost}">
+            <td th:text="${cat.categoryName}"></td>
+            <td style="width: 10%;">
+              <form th:action="${'/assigncategory'}" method="post">
+                <input type="hidden" name="postId" th:value="${post.id}">
+                <input type="hidden" name="categoryId" th:value="${cat.id}">
+                <button class="btn btn-success btn-sm">+</button>
+              </form>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+
+
+
+
+
+    <div class="row col-7 m-auto">
+      <form method="post" th:action="${'/editPost'}">
+        <div class="mb-3">
+          <label class="form-label" th:text = "#{admin.title}">Заголовок</label>
+          <input type="hidden" th:value="${post.getId()}" name="id">
+          <input type="text" class="form-control" id="title" name="title" th:value="${post.getTitle()}">
+        </div>
+        <div class="mb-3">
+          <label  class="form-label" th:text = "#{admin.shortDescription}">Краткое содержание</label>
+          <textarea class="form-control" id="shortContent" name="shortContent" th:text="${post.getShortContent()}"></textarea>
+        </div>
+        <div class="mb-3">
+          <label  class="form-label" th:text = "#{admin.content}">Содержание</label>
+          <textarea class="form-control" id="content" name="content" th:text="${post.getContent()}"></textarea>
+        </div>
+
+        <div class="mb-3">
+          <label  class="form-label" th:text = "#{admin.image}">Ссылка на картинку</label>
+          <input type="text" class="form-control" id="pictureUrl" name="pictureUrl" th:value="${post.getPictureURL()}">
+        </div>
+
+
+        <button type="submit" class="btn btn-primary bg-success border-0" th:text = "#{admin.save}">Сохранить</button>
+        <a th:href="@{'/deletePost/' + ${post.getId()}}" class="btn btn-primary bg-danger border-0" th:text = "#{admin.delete}"> Удалить</a>
+        <a th:href="@{'/adminPosts'}" class="btn bg-secondary border-0 float-end text-white" th:text = "#{admin.back}"> Вернуться</a>
+      </form>
+
+    </div>
+
+
+  </div>
+</div>
+
+</html>

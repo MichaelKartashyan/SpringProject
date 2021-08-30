@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org" layout:decorator="'layout/main.html'">
+
+
+
+<div layout:fragment="content">
+    <div class="container">
+        <div class="row col-7 m-auto">
+            <form method="post" th:action="${'/edittask'}">
+                <input type="hidden" name="id" th:value="${task.id}">
+                <div class="mb-3">
+                    <label class="form-label">Name</label>
+                    <input type="text" class="form-control" id="name" name="name" th:value="${task.name}">
+                </div>
+                <div class="mb-3">
+                    <label  class="form-label">Description</label>
+                    <textarea class="form-control" id="description" name="description" th:value="${task.description}"></textarea>
+                </div>
+                <div class="mb-3">
+                    <label  class="form-label">Date</label>
+                    <input type="text" class="form-control" id="date" name="date" th:value="${task.deadlineDate}">
+                </div>
+
+                <div class="mb-3">
+                    <label  class="form-label">Done : </label>
+                    <select name="done" class="form-control">
+                        <option>Yes</option>
+                        <option>No</option>
+                    </select>
+                </div>
+
+
+                <button type="submit" class="btn btn-primary bg-success border-0" >Save</button>
+                <a th:href="@{'/deletetask/' + ${task.id}}" class="btn btn-primary bg-danger border-0"> Delete</a>
+                <a th:href="@{'/task'}" class="btn bg-secondary border-0 float-end text-white"> Come back</a>
+            </form>
+        </div>
+
+    </div>
+</div>
+</html>
